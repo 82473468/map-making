@@ -1,0 +1,24 @@
+<launch>
+
+
+    <!-- Rviz -->
+    <arg name="rviz" default="true" />
+
+     <node  name="makingNode" pkg="txttopcd" type="makingNode" output="screen" >
+        <param name="data_name" value="poles_map.pcd" />
+        <param name="pcd_name" value="0925_map.pcd" />
+         <param name="rawpcd_name" value="raw_2.pcd" />
+         <param name="txtorpcd" value="1" /> <!-- 0为txt，否者为pcd-->
+      </node>
+
+     <group if="$(arg rviz)">
+     <arg name="gui" default="true" />
+     <param name="use_gui" value="$(arg gui)"/>
+     <node pkg="rviz" type="rviz" name="rviz" respawn="true" args="-d $(find txttopcd)/launch/demo.rviz"/>
+     </group>
+
+
+</launch>
+
+
+

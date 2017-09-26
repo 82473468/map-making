@@ -1,0 +1,1 @@
+function: put the poles.txt in the data folder, change the txt_name of the demo.launch into the name of the txt file, and change the pcd_name into a name what you want. run the demo.launch, you will get the map.

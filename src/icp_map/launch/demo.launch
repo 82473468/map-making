@@ -1,0 +1,29 @@
+<launch>
+    <!-- Rviz -->
+    <arg name="rviz" default="true" />
+
+      <node  name="icp_mapNode" pkg="icp_map" type="icp_mapNode" output="screen" >
+        <param name="map_str" value="$(find icp_map)/data/background.vtk" /> <!--vtk全地图-->
+        <param name="filter_str" value="$(find icp_map)/data/localmap_filter.yaml" /> <!--滤波配置文件地址-->
+        <param name="txt_str" value="$(find icp_map)/data/odom_path_1.txt" /> <!--地图筛选点文件-->
+        <param name="polesvtk_name" value="$(find icp_map)/data/poles.vtk" /> <!--杆子地图-->
+        <param name="odomvtk_name" value="$(find icp_map)/data/odom.vtk" /> <!--odom轨迹-->
+        <param name="gpsvtk_name" value="$(find icp_map)/data/gps.vtk" /> <!--gps轨迹-->
+        <param name="mapvtk_name" value="$(find icp_map)/data/0925.vtk" /> <!--生成的地图-->
+        <param name="latitude" value="22.58267784" /> <!--起点经度-->
+        <param name="longitude" value="113.9627762" /> <!--起点纬度-->
+        <param name="x_offset" value="142" /> <!--X轴偏移-->
+        <param name="y_offset" value="-5" /> <!--Y轴偏移-->
+        <param name="theta" value="0" /> <!--旋转角度-->
+      </node>
+
+    <group if="$(arg rviz)">
+     <arg name="gui" default="true" />
+     <param name="use_gui" value="$(arg gui)"/>
+     <node pkg="rviz" type="rviz" name="rviz" respawn="true" args="-d $(find icp_map)/launch/demo.rviz"/>
+     <node pkg="rostopic" type="rostopic" name="fake_gps_fix" args="pub /fake_gps/fix sensor_msgs/NavSatFix --latch --file=$(find rviz_satellite)/launch/demo.gps" output="screen"/>
+     </group>
+</launch>
+
+
+

@@ -1,0 +1,24 @@
+<launch>
+
+
+    <!--解析点云数据-->
+     <node  name="cloud_node" pkg="rslidar_pointcloud" type="cloud_node" output="screen" >
+        <param name="curves_path" value="/data/LM254/curves.csv" />
+        <param name="angle_path" value="/data/LM254/angle.csv" />
+        <param name="channel_path" value="/data/LM254/ChannelNum.csv" />
+      </node>
+
+    <!--树干检测-->
+    <node pkg="poles_mutlistable" name="poles_mutlistableNode" type="poles_mutlistableNode" output="screen">
+    </node>
+
+       <!-- Rviz -->
+        <arg name="rviz" default="true" />
+    <group if="$(arg rviz)">
+     <arg name="gui" default="true" />
+     <param name="use_gui" value="$(arg gui)"/>
+     <node pkg="rviz" type="rviz" name="rviz" respawn="true" args="-d $(find poles_mutlistable)/launch/demo.rviz"/>
+     </group>
+
+</launch>
+

@@ -1,0 +1,14 @@
+<launch>
+
+
+
+
+    <!--树干检测-->
+    <node pkg="poles_mutlistable" name="poles_mutlistableNode" type="poles_mutlistableNode">
+    </node>
+
+    <!--rviz -->
+    <node pkg="rviz" name="rviz" type="rviz"/>
+
+
+</launch>

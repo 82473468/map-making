@@ -1,0 +1,21 @@
+<launch>
+
+
+    <!-- Rviz -->
+    <arg name="rviz" default="true" />
+
+     <node  name="gpstopcdNode" pkg="gpstopcd" type="gpstopcdNode" output="screen" >
+        <param name="gpspcd_name" value="map_industry_0910_2_gps.pcd" /> <!--生成的地图-->
+      </node>
+
+     <group if="$(arg rviz)">
+     <arg name="gui" default="true" />
+     <param name="use_gui" value="$(arg gui)"/>
+     <node pkg="rviz" type="rviz" name="rviz" respawn="true" args="-d $(find gpstopcd)/launch/demo.rviz"/>
+     </group>
+
+
+</launch>
+
+
+

@@ -1,0 +1,10 @@
+# backup files
+*.bak
+*~
+*.orig
+*.autosave
+*.txt
+*.pcd
+
+*.zip
+

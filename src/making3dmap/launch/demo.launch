@@ -1,0 +1,28 @@
+<launch>
+    <!-- Rviz -->
+    <arg name="rviz" default="true" />
+
+     <node  name="map_createNode" pkg="making3dmap" type="map_createNode" output="screen" >
+        <param name="backgroudpcd_name" value="1_2300_map_voxel.pcd" /> <!--背景地图-->
+        <param name="polespcd_name" value="map_industry_0910_2.pcd" /> <!--杆子地图-->
+        <param name="odompcd_name" value="trajectory_loop.pcd" /> <!--odom轨迹-->
+        <param name="gpspcd_name" value="map_industry_0910_2_gps.pcd" /> <!--gps轨迹-->
+        <param name="mappcd_name" value="map_industry_0910_2_3d.pcd" /> <!--生成的地图-->
+        <param name="latitude" value="22.58496094" /> <!--起点经度-->
+        <param name="longitude" value="113.9627151" /> <!--起点纬度-->
+        <param name="x_offset" value="0" /> <!--X轴偏移-->
+        <param name="y_offset" value="0" /> <!--Y轴偏移-->
+        <param name="theta" value="-22" /> <!--旋转角度-->
+        <param name="filter_label" value="0" /> <!--是否对背景地图滤波，0为不滤波，1为滤波-->
+      </node>
+
+     <group if="$(arg rviz)">
+     <arg name="gui" default="true" />
+     <param name="use_gui" value="$(arg gui)"/>
+     <node pkg="rviz" type="rviz" name="rviz" respawn="true" args="-d $(find making3dmap)/launch/demo.rviz"/>
+     </group>
+
+</launch>
+
+
+
